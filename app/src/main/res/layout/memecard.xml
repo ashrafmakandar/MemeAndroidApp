@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:padding="10dp"
+    app:cardElevation="2dp"
+
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <ImageView
+            android:id="@+id/memeimage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:scaleType="fitXY"
+
+            android:layout_margin="4dp"
+            android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/names"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:capitalize="characters"
+            android:text="some meme text"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_margin="2dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
