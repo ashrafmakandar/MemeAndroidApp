@@ -1,5 +1,6 @@
 package com.ashraf.memeandroidapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ashraf.memeandroidapp.model.Meme
 import com.ashraf.memeandroidapp.network.MemeApi
 import com.ashraf.memeandroidapp.repo.MemeRepo
+import com.ashraf.memeandroidapp.ui.DetailActivity
 import com.ashraf.memeandroidapp.ui.memelistadapter
 import com.ashraf.memeandroidapp.utils.MemeConstants
 import com.ashraf.memeandroidapp.utils.Memeitem
@@ -53,6 +55,9 @@ class MainActivity : AppCompatActivity(), Memeitem {
 
     override fun clicked(position: Int) {
         Toast.makeText(this, listmeme[position].name, Toast.LENGTH_SHORT).show()
+        var intent=Intent(this,DetailActivity::class.java)
+        intent.putExtra("meme",listmeme[position])
+        startActivity(intent)
 
     }
 }

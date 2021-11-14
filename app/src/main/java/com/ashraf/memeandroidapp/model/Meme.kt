@@ -2,6 +2,7 @@ package com.ashraf.memeandroidapp.model
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Meme(
     @SerializedName("box_count")
@@ -16,4 +17,4 @@ data class Meme(
     val url: String,
     @SerializedName("width")
     val width: Int
-)
+):Serializable
