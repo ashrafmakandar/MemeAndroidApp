@@ -44,17 +44,7 @@ class MainActivity : AppCompatActivity(), Memeitem {
         memeViewModel =
             ViewModelProvider(this, MemeViewModelFactory(repo)).get(MemeViewModel::class.java)
 
-/*progressBar.visibility= View.VISIBLE
-        memeViewModel.memes.observe(this@MainActivity, {
 
-            Handler(Looper.getMainLooper()).post {
-                listmeme = it.data.memes
-                adapter = memelistadapter(applicationContext, listmeme, this@MainActivity)
-                progressBar.visibility= View.GONE
-                recyclerView.adapter = adapter
-
-            }
-        })*/
         memeViewModel.memes.observe(this,{
             when(it){
                 is MemeResults.Loading->{
