@@ -67,7 +67,10 @@ class MainActivity : AppCompatActivity(), Memeitem {
                     recyclerView.adapter = adapter
                 }
                 is MemeResults.Error->{
-                    Toast.makeText(this,it.error,Toast.LENGTH_SHORT).show()
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(this,it.error,Toast.LENGTH_SHORT).show()
+                    }
+
                 }
             }
         })

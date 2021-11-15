@@ -28,6 +28,9 @@ class MemeRepo(val memeApi: MemeApi) {
 
         }
         else{
+            memesdata.postValue(MemeResults.Loading(
+                View.GONE
+            ))
             memesdata.postValue(
                 MemeResults.Error("some error")
             )
