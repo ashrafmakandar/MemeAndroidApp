@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ashraf.memeandroidapp.model.MemesResponse
 import com.ashraf.memeandroidapp.repo.MemeRepo
+import com.ashraf.memeandroidapp.utils.MemeResults
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -15,6 +16,6 @@ class MemeViewModel(var repo: MemeRepo):ViewModel() {
             repo.getmemes()
         }
     }
-    val memes:LiveData<MemesResponse>
+    val memes:LiveData<MemeResults<MemesResponse>>
     get() = repo.memes
 }

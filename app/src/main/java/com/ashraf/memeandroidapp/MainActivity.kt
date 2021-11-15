@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +17,7 @@ import com.ashraf.memeandroidapp.repo.MemeRepo
 import com.ashraf.memeandroidapp.ui.DetailActivity
 import com.ashraf.memeandroidapp.ui.memelistadapter
 import com.ashraf.memeandroidapp.utils.MemeConstants
+import com.ashraf.memeandroidapp.utils.MemeResults
 import com.ashraf.memeandroidapp.utils.Memeitem
 import com.ashraf.memeandroidapp.viewmodel.MemeViewModel
 import com.ashraf.memeandroidapp.viewmodel.MemeViewModelFactory
@@ -26,6 +29,7 @@ class MainActivity : AppCompatActivity(), Memeitem {
     lateinit var memeViewModel: MemeViewModel
     lateinit var adapter: memelistadapter
     lateinit var recyclerView: RecyclerView
+    lateinit var progressBar: ProgressBar
     lateinit var listmeme: List<Meme>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,20 +39,39 @@ class MainActivity : AppCompatActivity(), Memeitem {
         recyclerView = findViewById(R.id.recylermemeview)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
+        progressBar= findViewById(R.id.progressBar)
 
         memeViewModel =
             ViewModelProvider(this, MemeViewModelFactory(repo)).get(MemeViewModel::class.java)
 
-
+/*progressBar.visibility= View.VISIBLE
         memeViewModel.memes.observe(this@MainActivity, {
 
             Handler(Looper.getMainLooper()).post {
                 listmeme = it.data.memes
                 adapter = memelistadapter(applicationContext, listmeme, this@MainActivity)
+                progressBar.visibility= View.GONE
                 recyclerView.adapter = adapter
 
             }
+        })*/
+        memeViewModel.memes.observe(this,{
+            when(it){
+                is MemeResults.Loading->{
+                    progressBar.visibility= it.loading
+                }
+                is MemeResults.Memedata->{
+                    listmeme = it.memes.data.memes
+                    adapter = memelistadapter(applicationContext, listmeme, this@MainActivity)
+                    progressBar.visibility= View.GONE
+                    recyclerView.adapter = adapter
+                }
+                is MemeResults.Error->{
+                    Toast.makeText(this,it.error,Toast.LENGTH_SHORT).show()
+                }
+            }
         })
+
 
 
     }
